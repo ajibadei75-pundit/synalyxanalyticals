@@ -41,6 +41,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <>
+              <NotificationBell />
               {isStaff && (
                 <Button asChild variant="ghost" size="sm">
                   <Link to="/admin">Admin</Link>
