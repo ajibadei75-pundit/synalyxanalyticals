@@ -1,3 +1,5 @@
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
 interface LogoProps {
   className?: string;
   showWordmark?: boolean;
@@ -22,16 +24,8 @@ export function LogoMark({ className }: { className?: string }) {
       />
       <g transform="translate(50 50)">
         <path d="M0 -26 A26 26 0 0 1 22 -13 L0 0 Z" fill="currentColor" />
-        <path
-          d="M0 -26 A26 26 0 0 1 22 -13 L0 0 Z"
-          fill="currentColor"
-          transform="rotate(120)"
-        />
-        <path
-          d="M0 -26 A26 26 0 0 1 22 -13 L0 0 Z"
-          fill="currentColor"
-          transform="rotate(240)"
-        />
+        <path d="M0 -26 A26 26 0 0 1 22 -13 L0 0 Z" fill="currentColor" transform="rotate(120)" />
+        <path d="M0 -26 A26 26 0 0 1 22 -13 L0 0 Z" fill="currentColor" transform="rotate(240)" />
         <circle r="6.5" fill="currentColor" opacity="0.35" />
       </g>
     </svg>
@@ -39,17 +33,29 @@ export function LogoMark({ className }: { className?: string }) {
 }
 
 export function Logo({ className = "", showWordmark = true, showTagline = false }: LogoProps) {
+  const { data } = useSiteSettings();
+  const brand = data?.brand_name || "Synalyx";
+  const tagline = data?.tagline || "Synchronized data, Simplified decisions";
+
   return (
     <span className={`inline-flex items-center gap-3 text-foreground ${className}`}>
-      <LogoMark className="h-9 w-9 shrink-0" />
+      {data?.logo_url ? (
+        <img
+          src={data.logo_url}
+          alt={`${brand} logo`}
+          className="h-9 w-9 shrink-0 rounded-md object-contain"
+        />
+      ) : (
+        <LogoMark className="h-9 w-9 shrink-0" />
+      )}
       {showWordmark && (
         <span className="flex flex-col leading-none">
           <span className="font-display text-xl font-bold uppercase tracking-[-0.04em]">
-            Synalyx
+            {brand}
           </span>
           {showTagline && (
             <span className="mt-1 text-[10px] font-medium tracking-tight text-muted-foreground">
-              Synchronized data, Simplified decisions
+              {tagline}
             </span>
           )}
         </span>
