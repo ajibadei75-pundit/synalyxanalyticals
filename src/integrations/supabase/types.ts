@@ -140,36 +140,51 @@ export type Database = {
       }
       assignments: {
         Row: {
+          accepts_link: boolean
+          allowed_formats: string[]
           brief: string
           cohort_id: string
           created_at: string
           created_by: string | null
           due_at: string
           id: string
+          is_open: boolean
+          max_file_mb: number
           max_score: number
           resource_url: string | null
+          submit_token: string
           title: string
         }
         Insert: {
+          accepts_link?: boolean
+          allowed_formats?: string[]
           brief?: string
           cohort_id: string
           created_at?: string
           created_by?: string | null
           due_at: string
           id?: string
+          is_open?: boolean
+          max_file_mb?: number
           max_score?: number
           resource_url?: string | null
+          submit_token?: string
           title: string
         }
         Update: {
+          accepts_link?: boolean
+          allowed_formats?: string[]
           brief?: string
           cohort_id?: string
           created_at?: string
           created_by?: string | null
           due_at?: string
           id?: string
+          is_open?: boolean
+          max_file_mb?: number
           max_score?: number
           resource_url?: string | null
+          submit_token?: string
           title?: string
         }
         Relationships: [
@@ -388,6 +403,39 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          kind: string
+          link: string | null
+          read_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -423,6 +471,39 @@ export type Database = {
           id?: string
           phone?: string | null
           status?: Database["public"]["Enums"]["account_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          accent: string
+          brand_name: string
+          created_at: string
+          id: string
+          logo_url: string | null
+          singleton: boolean
+          tagline: string
+          updated_at: string
+        }
+        Insert: {
+          accent?: string
+          brand_name?: string
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          singleton?: boolean
+          tagline?: string
+          updated_at?: string
+        }
+        Update: {
+          accent?: string
+          brand_name?: string
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          singleton?: boolean
+          tagline?: string
           updated_at?: string
         }
         Relationships: []
