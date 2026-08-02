@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { NotificationBell } from "@/components/notifications/NotificationBell";
 
 const links = [
   { to: "/", label: "Home" },
