@@ -17,6 +17,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EnrolRouteImport } from './routes/enrol'
+import { Route as SubmitTokenRouteImport } from './routes/submit.$token'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,11 @@ const EnrolRoute = EnrolRouteImport.update({
   path: '/enrol',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubmitTokenRoute = SubmitTokenRouteImport.update({
+  id: '/submit/$token',
+  path: '/submit/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/submit/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/submit/$token'
   id:
     | '__root__'
     | '/'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/submit/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   CoursesRoute: typeof CoursesRoute
   DashboardRoute: typeof DashboardRoute
   EnrolRoute: typeof EnrolRoute
+  SubmitTokenRoute: typeof SubmitTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnrolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/submit/$token': {
+      id: '/submit/$token'
+      path: '/submit/$token'
+      fullPath: '/submit/$token'
+      preLoaderRoute: typeof SubmitTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,17 +224,8 @@ const rootRouteChildren: RootRouteChildren = {
   CoursesRoute: CoursesRoute,
   DashboardRoute: DashboardRoute,
   EnrolRoute: EnrolRoute,
+  SubmitTokenRoute: SubmitTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

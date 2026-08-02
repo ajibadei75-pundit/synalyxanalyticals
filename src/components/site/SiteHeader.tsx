@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { NotificationBell } from "@/components/notifications/NotificationBell";
 
 const links = [
   { to: "/", label: "Home" },
@@ -41,6 +42,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <>
+              <NotificationBell />
               {isStaff && (
                 <Button asChild variant="ghost" size="sm">
                   <Link to="/admin">Admin</Link>
