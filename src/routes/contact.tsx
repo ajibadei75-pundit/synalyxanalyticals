@@ -25,8 +25,8 @@ export const Route = createFileRoute("/contact")({
 
 const channels = [
   { icon: Mail, label: "Email", value: "hello@synalyx.com" },
-  { icon: Phone, label: "Phone", value: "+000 000 0000" },
-  { icon: MessageCircle, label: "WhatsApp", value: "+000 000 0000" },
+  { icon: Phone, label: "Phone", value: "09153462245" },
+  { icon: MessageCircle, label: "WhatsApp", value: "09153462245" },
   { icon: MapPin, label: "Campus", value: "Add your campus address" },
 ];
 

@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="md:col-span-2">
           <Logo showTagline />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            SYNALYX Analytics is a school of data analytics and analysis. We train people to
+            Synalyx Analyticals is a school of data analytics and analysis. We train people to
             clean, question and present data so decisions stop being guesswork.
           </p>
         </div>
@@ -21,6 +21,21 @@ export function SiteFooter() {
             <li>
               <Link to="/courses" className="text-muted-foreground hover:text-foreground">
                 Courses
+              </Link>
+            </li>
+            <li>
+              <Link to="/projects" className="text-muted-foreground hover:text-foreground">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link to="/gallery" className="text-muted-foreground hover:text-foreground">
+                Gallery
+              </Link>
+            </li>
+            <li>
+              <Link to="/merch" className="text-muted-foreground hover:text-foreground">
+                Merch
               </Link>
             </li>
             <li>
@@ -47,14 +62,18 @@ export function SiteFooter() {
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             <li>hello@synalyx.com</li>
-            <li>+000 000 0000</li>
+            <li>
+              <a href="tel:+2349153462245" className="hover:text-foreground">
+                09153462245
+              </a>
+            </li>
             <li>Add your campus address</li>
           </ul>
         </div>
       </div>
 
       <div className="relative border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        &copy; {new Date().getFullYear()} SYNALYX Analytics. Synchronized data, simplified
+        &copy; {new Date().getFullYear()} Synalyx Analyticals. Synchronized data, simplified
         decisions.
         <Link
           to="/auth"
@@ -65,6 +84,5 @@ export function SiteFooter() {
         />
       </div>
     </footer>
-
   );
 }

@@ -19,7 +19,7 @@ function toEmail(identifier: string) {
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
-  validateSearch: (search: Record<string, unknown>) => ({
+  validateSearch: (search: Record<string, unknown>): { portal?: "admin" | undefined } => ({
     portal: search["portal"] === "admin" ? ("admin" as const) : undefined,
   }),
   head: () => ({
@@ -51,7 +51,7 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate({ to: isStaff && staffMode ? "/admin" : "/dashboard", replace: true });
+      navigate({ to: isStaff && staffMode ? "/admin" : "/welcome", replace: true });
     }
   }, [loading, user, isStaff, staffMode, navigate]);
 
@@ -63,7 +63,7 @@ function AuthPage() {
       if (mode === "signin") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        navigate({ to: staffMode ? "/admin" : "/dashboard", replace: true });
+        navigate({ to: staffMode ? "/admin" : "/welcome", replace: true });
       } else {
         const { data, error } = await supabase.auth.signUp({
           email,
@@ -77,7 +77,7 @@ function AuthPage() {
         if (!data.session) {
           toast.success("Check your email to confirm your account.");
         } else {
-          navigate({ to: "/dashboard", replace: true });
+          navigate({ to: "/welcome", replace: true });
         }
       }
     } catch (err) {
@@ -96,7 +96,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/dashboard", replace: true });
+    navigate({ to: "/welcome", replace: true });
   };
 
   return (

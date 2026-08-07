@@ -17,6 +17,11 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EnrolRouteImport } from './routes/enrol'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as MerchRouteImport } from './routes/merch'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
 import { Route as SubmitTokenRouteImport } from './routes/submit.$token'
 
 const IndexRoute = IndexRouteImport.update({
@@ -59,6 +64,31 @@ const EnrolRoute = EnrolRouteImport.update({
   path: '/enrol',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WelcomeRoute = WelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
 const SubmitTokenRoute = SubmitTokenRouteImport.update({
   id: '/submit/$token',
   path: '/submit/$token',
@@ -68,35 +98,50 @@ const SubmitTokenRoute = SubmitTokenRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/gallery': typeof GalleryRoute
+  '/merch': typeof MerchRoute
+  '/projects': typeof ProjectsRoute
+  '/welcome': typeof WelcomeRoute
+  '/admin/content': typeof AdminContentRoute
   '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/gallery': typeof GalleryRoute
+  '/merch': typeof MerchRoute
+  '/projects': typeof ProjectsRoute
+  '/welcome': typeof WelcomeRoute
+  '/admin/content': typeof AdminContentRoute
   '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/enrol': typeof EnrolRoute
+  '/gallery': typeof GalleryRoute
+  '/merch': typeof MerchRoute
+  '/projects': typeof ProjectsRoute
+  '/welcome': typeof WelcomeRoute
+  '/admin/content': typeof AdminContentRoute
   '/submit/$token': typeof SubmitTokenRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +155,11 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/gallery'
+    | '/merch'
+    | '/projects'
+    | '/welcome'
+    | '/admin/content'
     | '/submit/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +171,11 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/gallery'
+    | '/merch'
+    | '/projects'
+    | '/welcome'
+    | '/admin/content'
     | '/submit/$token'
   id:
     | '__root__'
@@ -132,18 +187,27 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/enrol'
+    | '/gallery'
+    | '/merch'
+    | '/projects'
+    | '/welcome'
+    | '/admin/content'
     | '/submit/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRoute
   DashboardRoute: typeof DashboardRoute
   EnrolRoute: typeof EnrolRoute
+  GalleryRoute: typeof GalleryRoute
+  MerchRoute: typeof MerchRoute
+  ProjectsRoute: typeof ProjectsRoute
+  WelcomeRoute: typeof WelcomeRoute
   SubmitTokenRoute: typeof SubmitTokenRoute
 }
 
@@ -205,6 +269,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnrolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/submit/$token': {
       id: '/submit/$token'
       path: '/submit/$token'
@@ -215,15 +314,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminContentRoute: typeof AdminContentRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminContentRoute: AdminContentRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRoute,
   DashboardRoute: DashboardRoute,
   EnrolRoute: EnrolRoute,
+  GalleryRoute: GalleryRoute,
+  MerchRoute: MerchRoute,
+  ProjectsRoute: ProjectsRoute,
+  WelcomeRoute: WelcomeRoute,
   SubmitTokenRoute: SubmitTokenRoute,
 }
 export const routeTree = rootRouteImport

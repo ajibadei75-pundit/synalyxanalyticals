@@ -30,7 +30,7 @@ const coursesQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/enrol")({
-  validateSearch: (search: Record<string, unknown>) => ({
+  validateSearch: (search: Record<string, unknown>): { course?: string | undefined } => ({
     course: typeof search["course"] === "string" ? search["course"] : undefined,
   }),
   head: () => ({
