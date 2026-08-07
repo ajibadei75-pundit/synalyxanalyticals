@@ -96,12 +96,19 @@ function ContentStudio() {
 
   async function submitMedia(e: React.FormEvent) {
     e.preventDefault();
-    if (!mediaFile) return toast.error("Choose an image or video");
-    if (mediaFile.size > MAX_UPLOAD_MB * 1024 * 1024)
-      return toast.error(`File must be under ${MAX_UPLOAD_MB}MB`);
+    if (!mediaFile) {
+      toast.error("Choose an image or video");
+      return;
+    }
+    if (mediaFile.size > MAX_UPLOAD_MB * 1024 * 1024) {
+      toast.error(`File must be under ${MAX_UPLOAD_MB}MB`);
+      return;
+    }
     const isVideo = mediaFile.type.startsWith("video/");
-    if (!isVideo && !mediaFile.type.startsWith("image/"))
-      return toast.error("Only images and videos are allowed");
+    if (!isVideo && !mediaFile.type.startsWith("image/")) {
+      toast.error("Only images and videos are allowed");
+      return;
+    }
 
     setUploading(true);
     try {
