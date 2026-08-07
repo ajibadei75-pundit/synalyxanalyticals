@@ -21,7 +21,7 @@ import {
   toggleContentPublished,
 } from "@/lib/content.functions";
 
-export const Route = createFileRoute("/admin/content")({
+export const Route = createFileRoute("/admin-content")({
   head: () => ({
     meta: [
       { title: "Content Studio — Synalyx Analyticals Admin" },
