@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -183,10 +183,15 @@ function Admin() {
               Control centre
             </h1>
           </div>
-          <Badge variant="outline" className="h-8 px-3">
-            <Users className="mr-2 h-3.5 w-3.5" />
-            {overview.data?.profiles.length ?? 0} people
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Button asChild variant="outline" size="sm">
+              <Link to="/admin-content">Content studio</Link>
+            </Button>
+            <Badge variant="outline" className="h-8 px-3">
+              <Users className="mr-2 h-3.5 w-3.5" />
+              {overview.data?.profiles.length ?? 0} people
+            </Badge>
+          </div>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

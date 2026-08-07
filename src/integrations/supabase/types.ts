@@ -403,6 +403,99 @@ export type Database = {
           },
         ]
       }
+      media_items: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string
+          event_date: string | null
+          id: string
+          is_published: boolean
+          media_type: string
+          sort_order: number
+          storage_path: string | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          event_date?: string | null
+          id?: string
+          is_published?: boolean
+          media_type?: string
+          sort_order?: number
+          storage_path?: string | null
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          event_date?: string | null
+          id?: string
+          is_published?: boolean
+          media_type?: string
+          sort_order?: number
+          storage_path?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      merch_items: {
+        Row: {
+          available_until: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          description: string
+          id: string
+          image_url: string | null
+          is_published: boolean
+          name: string
+          preorder_url: string | null
+          price: number | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          available_until?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          name: string
+          preorder_url?: string | null
+          price?: number | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          available_until?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          name?: string
+          preorder_url?: string | null
+          price?: number | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           body: string
@@ -471,6 +564,51 @@ export type Database = {
           id?: string
           phone?: string | null
           status?: Database["public"]["Enums"]["account_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      showcase_projects: {
+        Row: {
+          author_name: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          image_url: string | null
+          is_published: boolean
+          project_url: string | null
+          sort_order: number
+          summary: string
+          title: string
+          tools: string[]
+          updated_at: string
+        }
+        Insert: {
+          author_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          project_url?: string | null
+          sort_order?: number
+          summary?: string
+          title: string
+          tools?: string[]
+          updated_at?: string
+        }
+        Update: {
+          author_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          project_url?: string | null
+          sort_order?: number
+          summary?: string
+          title?: string
+          tools?: string[]
           updated_at?: string
         }
         Relationships: []

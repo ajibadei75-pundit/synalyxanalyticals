@@ -9,6 +9,9 @@ import { NotificationBell } from "@/components/notifications/NotificationBell";
 const links = [
   { to: "/", label: "Home" },
   { to: "/courses", label: "Courses" },
+  { to: "/projects", label: "Projects" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/merch", label: "Merch" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
