@@ -30,6 +30,7 @@ export const Route = createFileRoute("/merch")({
 
 function Merch() {
   const { data, isLoading } = useQuery({ queryKey: ["merch"], queryFn: () => listMerch() });
+  const reviews = useReviews("merch");
   const items = data ?? [];
 
   return (
