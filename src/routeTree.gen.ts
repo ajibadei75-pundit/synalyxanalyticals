@@ -23,6 +23,7 @@ import { Route as MerchRouteImport } from './routes/merch'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as SubmitTokenRouteImport } from './routes/submit.$token'
 
 const IndexRoute = IndexRouteImport.update({
@@ -95,6 +96,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SubmitTokenRoute = SubmitTokenRouteImport.update({
   id: '/submit/$token',
   path: '/submit/$token',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/merch': typeof MerchRoute
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/submit/$token': typeof SubmitTokenRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/merch': typeof MerchRoute
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/submit/$token': typeof SubmitTokenRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/merch': typeof MerchRoute
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/submit/$token': typeof SubmitTokenRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/merch'
     | '/projects'
     | '/welcome'
+    | '/blog/$slug'
     | '/submit/$token'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/merch'
     | '/projects'
     | '/welcome'
+    | '/blog/$slug'
     | '/submit/$token'
     | '/blog'
   id:
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/merch'
     | '/projects'
     | '/welcome'
+    | '/blog/$slug'
     | '/submit/$token'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   MerchRoute: typeof MerchRoute
   ProjectsRoute: typeof ProjectsRoute
   WelcomeRoute: typeof WelcomeRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   SubmitTokenRoute: typeof SubmitTokenRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -325,6 +338,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/submit/$token': {
       id: '/submit/$token'
       path: '/submit/$token'
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   MerchRoute: MerchRoute,
   ProjectsRoute: ProjectsRoute,
   WelcomeRoute: WelcomeRoute,
+  BlogSlugRoute: BlogSlugRoute,
   SubmitTokenRoute: SubmitTokenRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
