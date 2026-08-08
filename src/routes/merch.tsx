@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ShoppingBag, Timer } from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { Button } from "@/components/ui/button";
 import { listMerch } from "@/lib/content.functions";
 
