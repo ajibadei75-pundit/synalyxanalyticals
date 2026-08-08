@@ -73,6 +73,7 @@ function ContentStudio() {
     queryClient.invalidateQueries({ queryKey: ["gallery"] });
     queryClient.invalidateQueries({ queryKey: ["merch"] });
     queryClient.invalidateQueries({ queryKey: ["projects"] });
+    queryClient.invalidateQueries({ queryKey: ["blog"] });
   };
 
   const addMedia = useServerFn(createMedia);
@@ -82,7 +83,7 @@ function ContentStudio() {
   const togglePublished = useServerFn(toggleContentPublished);
 
   const deleteMutation = useMutation({
-    mutationFn: (vars: { kind: "media" | "merch" | "project"; id: string }) =>
+    mutationFn: (vars: { kind: "media" | "merch" | "project" | "blog"; id: string }) =>
       removeItem({ data: vars }),
     onSuccess: () => {
       toast.success("Removed");
@@ -92,7 +93,7 @@ function ContentStudio() {
   });
 
   const toggleMutation = useMutation({
-    mutationFn: (vars: { kind: "media" | "merch" | "project"; id: string; is_published: boolean }) =>
+    mutationFn: (vars: { kind: "media" | "merch" | "project" | "blog"; id: string; is_published: boolean }) =>
       togglePublished({ data: vars }),
     onSuccess: () => invalidate(),
     onError: (e: Error) => toast.error(e.message),
@@ -518,7 +519,7 @@ function ItemList({
 }: {
   loading: boolean;
   items: { id: string; label: string; meta: string; published: boolean }[];
-  kind: "media" | "merch" | "project";
+  kind: "media" | "merch" | "project" | "blog";
   onDelete: (id: string) => void;
   onToggle: (id: string, isPublished: boolean) => void;
 }) {
