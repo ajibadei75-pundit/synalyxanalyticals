@@ -14,7 +14,6 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminContentRouteImport } from './routes/admin-content'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -23,6 +22,7 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as SubmitTokenRouteImport } from './routes/submit.$token'
 
 const IndexRoute = IndexRouteImport.update({
@@ -48,11 +48,6 @@ const AdminContentRoute = AdminContentRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -95,6 +90,11 @@ const WelcomeRoute = WelcomeRouteImport.update({
   path: '/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SubmitTokenRoute = SubmitTokenRouteImport.update({
   id: '/submit/$token',
   path: '/submit/$token',
@@ -107,7 +107,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -117,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
   '/submit/$token': typeof SubmitTokenRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -124,7 +124,6 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -134,6 +133,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
   '/submit/$token': typeof SubmitTokenRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,7 +142,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -152,6 +151,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/welcome': typeof WelcomeRoute
   '/submit/$token': typeof SubmitTokenRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -161,7 +161,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
-    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -171,6 +170,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/welcome'
     | '/submit/$token'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -178,7 +178,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
-    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -188,6 +187,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/welcome'
     | '/submit/$token'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -195,7 +195,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
-    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -205,6 +204,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/welcome'
     | '/submit/$token'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -213,7 +213,6 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AdminContentRoute: typeof AdminContentRoute
   AuthRoute: typeof AuthRoute
-  BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRoute
   DashboardRoute: typeof DashboardRoute
@@ -223,6 +222,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   WelcomeRoute: typeof WelcomeRoute
   SubmitTokenRoute: typeof SubmitTokenRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -260,13 +260,6 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -325,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/submit/$token': {
       id: '/submit/$token'
       path: '/submit/$token'
@@ -341,7 +341,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AdminContentRoute: AdminContentRoute,
   AuthRoute: AuthRoute,
-  BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRoute,
   DashboardRoute: DashboardRoute,
@@ -351,6 +350,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   WelcomeRoute: WelcomeRoute,
   SubmitTokenRoute: SubmitTokenRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
