@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ShoppingBag, Timer } from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { Button } from "@/components/ui/button";
 import { listMerch } from "@/lib/content.functions";
 
@@ -29,6 +30,7 @@ export const Route = createFileRoute("/merch")({
 
 function Merch() {
   const { data, isLoading } = useQuery({ queryKey: ["merch"], queryFn: () => listMerch() });
+  const reviews = useReviews("merch");
   const items = data ?? [];
 
   return (
@@ -93,11 +95,20 @@ function Merch() {
                         </span>
                       )}
                     </div>
-                    <Button asChild className="mt-6 w-full">
+                    <div className="mt-4">
+                      <ReviewPanel
+                        targetType="merch"
+                        targetId={m.id}
+                        title={m.name}
+                        reviews={reviews.get(m.id) ?? []}
+                      />
+                    </div>
+                    <Button asChild className="mt-5 w-full">
                       <a href={m.preorder_url ?? "#"} target="_blank" rel="noopener noreferrer">
                         Pre-order now
                       </a>
                     </Button>
+
                   </div>
                 </article>
               </Reveal>

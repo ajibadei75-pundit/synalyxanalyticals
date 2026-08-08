@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CalendarDays, PlayCircle } from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { listGallery } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/gallery")({
@@ -31,6 +32,7 @@ function Gallery() {
     queryKey: ["gallery"],
     queryFn: () => listGallery(),
   });
+  const reviews = useReviews("media");
 
   const items = data ?? [];
 
@@ -100,7 +102,16 @@ function Gallery() {
                         })}
                       </p>
                     )}
+                    <div className="mt-4">
+                      <ReviewPanel
+                        targetType="media"
+                        targetId={m.id}
+                        title={m.title}
+                        reviews={reviews.get(m.id) ?? []}
+                      />
+                    </div>
                   </figcaption>
+
                 </figure>
               </Reveal>
             ))}

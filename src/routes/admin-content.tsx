@@ -4,8 +4,19 @@ import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, EyeOff, Images, Loader2, ShoppingBag, Sparkles, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  Eye,
+  EyeOff,
+  Images,
+  Loader2,
+  ShoppingBag,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
+import { BlogComposer } from "@/components/site/BlogComposer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -62,6 +73,7 @@ function ContentStudio() {
     queryClient.invalidateQueries({ queryKey: ["gallery"] });
     queryClient.invalidateQueries({ queryKey: ["merch"] });
     queryClient.invalidateQueries({ queryKey: ["projects"] });
+    queryClient.invalidateQueries({ queryKey: ["blog"] });
   };
 
   const addMedia = useServerFn(createMedia);
@@ -71,7 +83,7 @@ function ContentStudio() {
   const togglePublished = useServerFn(toggleContentPublished);
 
   const deleteMutation = useMutation({
-    mutationFn: (vars: { kind: "media" | "merch" | "project"; id: string }) =>
+    mutationFn: (vars: { kind: "media" | "merch" | "project" | "blog"; id: string }) =>
       removeItem({ data: vars }),
     onSuccess: () => {
       toast.success("Removed");
@@ -81,7 +93,7 @@ function ContentStudio() {
   });
 
   const toggleMutation = useMutation({
-    mutationFn: (vars: { kind: "media" | "merch" | "project"; id: string; is_published: boolean }) =>
+    mutationFn: (vars: { kind: "media" | "merch" | "project" | "blog"; id: string; is_published: boolean }) =>
       togglePublished({ data: vars }),
     onSuccess: () => invalidate(),
     onError: (e: Error) => toast.error(e.message),
@@ -494,7 +506,33 @@ function ContentStudio() {
             onToggle={(id, pub) => toggleMutation.mutate({ kind: "project", id, is_published: pub })}
           />
         </section>
+
+        {/* BLOG */}
+        <section className="rounded-3xl border border-border bg-card p-7">
+          <h2 className="inline-flex items-center gap-3 font-display text-xl font-bold uppercase">
+            <BookOpen className="h-5 w-5 text-primary-glow" /> Blog studio
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Pick a template, edit the sections and publish straight to the public blog.
+          </p>
+
+          <BlogComposer onPublished={invalidate} />
+
+          <ItemList
+            loading={isLoading}
+            items={(data?.blog ?? []).map((b) => ({
+              id: b.id,
+              label: b.title,
+              meta: `${b.category} · ${b.view_count} views`,
+              published: b.is_published,
+            }))}
+            kind="blog"
+            onDelete={(id) => deleteMutation.mutate({ kind: "blog", id })}
+            onToggle={(id, pub) => toggleMutation.mutate({ kind: "blog", id, is_published: pub })}
+          />
+        </section>
       </div>
+
     </SiteLayout>
   );
 }
@@ -507,7 +545,7 @@ function ItemList({
 }: {
   loading: boolean;
   items: { id: string; label: string; meta: string; published: boolean }[];
-  kind: "media" | "merch" | "project";
+  kind: "media" | "merch" | "project" | "blog";
   onDelete: (id: string) => void;
   onToggle: (id: string, isPublished: boolean) => void;
 }) {
