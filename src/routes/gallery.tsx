@@ -32,6 +32,7 @@ function Gallery() {
     queryKey: ["gallery"],
     queryFn: () => listGallery(),
   });
+  const reviews = useReviews("media");
 
   const items = data ?? [];
 
