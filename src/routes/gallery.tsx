@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CalendarDays, PlayCircle } from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { listGallery } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/gallery")({
