@@ -29,6 +29,7 @@ export const Route = createFileRoute("/projects")({
 
 function Projects() {
   const { data, isLoading } = useQuery({ queryKey: ["projects"], queryFn: () => listProjects() });
+  const reviews = useReviews("project");
   const items = data ?? [];
 
   return (
