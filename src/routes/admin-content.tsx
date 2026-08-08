@@ -4,8 +4,19 @@ import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, EyeOff, Images, Loader2, ShoppingBag, Sparkles, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  Eye,
+  EyeOff,
+  Images,
+  Loader2,
+  ShoppingBag,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
+import { BlogComposer } from "@/components/site/BlogComposer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
