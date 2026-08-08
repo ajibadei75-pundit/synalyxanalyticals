@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ExternalLink, LineChart } from "lucide-react";
 import { SiteLayout, PageHero } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { listProjects } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/projects")({
