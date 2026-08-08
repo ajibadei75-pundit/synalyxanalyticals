@@ -1,7 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { serverPublicClient } from "@/lib/public-client";
-import { mediaSchema, merchSchema, projectSchema } from "@/lib/content.schemas";
+import {
+  blogSchema,
+  mediaSchema,
+  merchSchema,
+  projectSchema,
+  reviewSchema,
+} from "@/lib/content.schemas";
 
 export const listGallery = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = serverPublicClient();
