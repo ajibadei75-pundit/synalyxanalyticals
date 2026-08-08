@@ -506,7 +506,33 @@ function ContentStudio() {
             onToggle={(id, pub) => toggleMutation.mutate({ kind: "project", id, is_published: pub })}
           />
         </section>
+
+        {/* BLOG */}
+        <section className="rounded-3xl border border-border bg-card p-7">
+          <h2 className="inline-flex items-center gap-3 font-display text-xl font-bold uppercase">
+            <BookOpen className="h-5 w-5 text-primary-glow" /> Blog studio
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Pick a template, edit the sections and publish straight to the public blog.
+          </p>
+
+          <BlogComposer onPublished={invalidate} />
+
+          <ItemList
+            loading={isLoading}
+            items={(data?.blog ?? []).map((b) => ({
+              id: b.id,
+              label: b.title,
+              meta: `${b.category} · ${b.view_count} views`,
+              published: b.is_published,
+            }))}
+            kind="blog"
+            onDelete={(id) => deleteMutation.mutate({ kind: "blog", id })}
+            onToggle={(id, pub) => toggleMutation.mutate({ kind: "blog", id, is_published: pub })}
+          />
+        </section>
       </div>
+
     </SiteLayout>
   );
 }
