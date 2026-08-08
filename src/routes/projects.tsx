@@ -96,17 +96,26 @@ function Projects() {
                         ))}
                       </ul>
                     )}
-                    {p.project_url && (
-                      <a
-                        href={p.project_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary-glow hover:underline"
-                      >
-                        View project <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    )}
+                    <div className="mt-6 flex flex-wrap items-center gap-4">
+                      <ReviewPanel
+                        targetType="project"
+                        targetId={p.id}
+                        title={p.title}
+                        reviews={reviews.get(p.id) ?? []}
+                      />
+                      {p.project_url && (
+                        <a
+                          href={p.project_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-primary-glow hover:underline"
+                        >
+                          View project <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
+
                 </article>
               </Reveal>
             ))}
