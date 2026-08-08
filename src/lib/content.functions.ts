@@ -66,15 +66,20 @@ export const listContentAdmin = createServerFn({ method: "GET" })
     const { data: staff } = await supabase.rpc("is_staff", { _user_id: userId });
     if (!staff) throw new Error("Forbidden");
 
-    const [media, merch, projects] = await Promise.all([
+    const [media, merch, projects, blog] = await Promise.all([
       supabase.from("media_items").select("*").order("created_at", { ascending: false }),
       supabase.from("merch_items").select("*").order("created_at", { ascending: false }),
       supabase.from("showcase_projects").select("*").order("created_at", { ascending: false }),
+      supabase
+        .from("blog_posts")
+        .select("id, title, slug, category, is_published, view_count, published_at")
+        .order("published_at", { ascending: false }),
     ]);
     return {
       media: media.data ?? [],
       merch: merch.data ?? [],
       projects: projects.data ?? [],
+      blog: blog.data ?? [],
     };
   });
 
