@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminContentRouteImport } from './routes/admin-content'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -47,6 +48,11 @@ const AdminContentRoute = AdminContentRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/admin-content': typeof AdminContentRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
+    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
+    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin-content'
     | '/auth'
+    | '/blog'
     | '/contact'
     | '/courses'
     | '/dashboard'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AdminContentRoute: typeof AdminContentRoute
   AuthRoute: typeof AuthRoute
+  BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRoute
   DashboardRoute: typeof DashboardRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AdminContentRoute: AdminContentRoute,
   AuthRoute: AuthRoute,
+  BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRoute,
   DashboardRoute: DashboardRoute,
@@ -334,13 +355,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

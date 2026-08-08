@@ -7,7 +7,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { ReviewPanel, useReviews } from "@/components/site/Reviews";
 import { listBlogPosts } from "@/lib/content.functions";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Data Blog — Synalyx Analyticals" },
