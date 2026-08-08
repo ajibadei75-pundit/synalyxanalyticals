@@ -102,7 +102,16 @@ function Gallery() {
                         })}
                       </p>
                     )}
+                    <div className="mt-4">
+                      <ReviewPanel
+                        targetType="media"
+                        targetId={m.id}
+                        title={m.title}
+                        reviews={reviews.get(m.id) ?? []}
+                      />
+                    </div>
                   </figcaption>
+
                 </figure>
               </Reveal>
             ))}
