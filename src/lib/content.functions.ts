@@ -261,14 +261,26 @@ export const listReviews = createServerFn({ method: "GET" })
   }))
   .handler(async ({ data }) => {
     const supabase = serverPublicClient();
+    // reviews_public deliberately excludes user_id so reviewer accounts stay private.
     const { data: rows, error } = await supabase
-      .from("reviews")
-      .select("id, target_id, user_id, author_name, rating, comment, created_at")
+      .from("reviews_public")
+      .select("id, target_id, author_name, rating, comment, created_at")
       .eq("target_type", data.target_type)
       .order("created_at", { ascending: false })
       .limit(500);
     if (error) throw new Error(error.message);
     return rows ?? [];
+  });
+
+export const listMyReviews = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data, error } = await context.supabase
+      .from("reviews")
+      .select("id, target_type, target_id, rating, comment")
+      .eq("user_id", context.userId);
+    if (error) throw new Error(error.message);
+    return data ?? [];
   });
 
 export const upsertReview = createServerFn({ method: "POST" })
