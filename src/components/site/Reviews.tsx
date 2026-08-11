@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -15,19 +15,38 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { deleteReview, listReviews, upsertReview } from "@/lib/content.functions";
+import { deleteReview, listMyReviews, listReviews, upsertReview } from "@/lib/content.functions";
 
 export type ReviewTarget = "media" | "merch" | "project" | "blog";
 
 export type ReviewRow = {
   id: string;
   target_id: string;
-  user_id: string;
   author_name: string;
   rating: number;
   comment: string;
   created_at: string;
 };
+
+export type MyReviewRow = {
+  id: string;
+  target_type: string;
+  target_id: string;
+  rating: number;
+  comment: string;
+};
+
+export function useMyReviews() {
+  const { user } = useAuth();
+  const load = useServerFn(listMyReviews);
+  const { data } = useQuery({
+    queryKey: ["my-reviews", user?.id],
+    queryFn: () => load() as Promise<MyReviewRow[]>,
+    enabled: Boolean(user),
+    staleTime: 30_000,
+  });
+  return data ?? [];
+}
 
 export function useReviews(targetType: ReviewTarget) {
   const load = useServerFn(listReviews);
@@ -79,16 +98,27 @@ export function ReviewPanel({
   const save = useServerFn(upsertReview);
   const remove = useServerFn(deleteReview);
   const [open, setOpen] = useState(false);
+  const myReviews = useMyReviews();
 
-  const mine = reviews.find((r) => r.user_id === user?.id);
+  const mine = myReviews.find((r) => r.target_type === targetType && r.target_id === targetId);
   const [rating, setRating] = useState(mine?.rating ?? 5);
   const [comment, setComment] = useState(mine?.comment ?? "");
+
+  useEffect(() => {
+    if (mine) {
+      setRating(mine.rating);
+      setComment(mine.comment);
+    }
+  }, [mine?.id, mine?.rating, mine?.comment]);
 
   const average = reviews.length
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
     : 0;
 
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["reviews", targetType] });
+  const invalidate = () => {
+    queryClient.invalidateQueries({ queryKey: ["reviews", targetType] });
+    queryClient.invalidateQueries({ queryKey: ["my-reviews"] });
+  };
 
   const saveMutation = useMutation({
     mutationFn: () =>

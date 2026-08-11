@@ -24,6 +24,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TrackManager } from "@/components/admin/TrackManager";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import {
@@ -209,12 +210,18 @@ function Admin() {
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="applications">Applications</TabsTrigger>
             <TabsTrigger value="students">Students</TabsTrigger>
+            <TabsTrigger value="tracks">Tracks</TabsTrigger>
             <TabsTrigger value="assignments">Assignments</TabsTrigger>
             <TabsTrigger value="grading">Grading</TabsTrigger>
             <TabsTrigger value="sessions">Sessions</TabsTrigger>
             <TabsTrigger value="notify">Notifications</TabsTrigger>
             <TabsTrigger value="branding">Branding</TabsTrigger>
           </TabsList>
+
+          {/* TRACKS */}
+          <TabsContent value="tracks" className="mt-6">
+            <TrackManager />
+          </TabsContent>
 
           {/* ANALYTICS */}
           <TabsContent value="analytics" className="mt-6 grid gap-5 lg:grid-cols-2">

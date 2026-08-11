@@ -6,6 +6,7 @@ import { Reveal, Counter } from "@/components/site/Reveal";
 import { LogoMark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { listCourses } from "@/lib/public.functions";
+import { ExploreSection } from "@/components/site/ExploreSection";
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
@@ -256,6 +257,7 @@ function Home() {
           </Reveal>
         </div>
       </section>
+      <ExploreSection />
     </SiteLayout>
   );
 }
