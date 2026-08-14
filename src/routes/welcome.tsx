@@ -7,6 +7,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { listGallery, listMerch, listProjects } from "@/lib/content.functions";
+import { NewsTicker } from "@/components/site/NewsTicker";
 
 export const Route = createFileRoute("/welcome")({
   head: () => ({
@@ -49,6 +50,7 @@ function Welcome() {
 
   return (
     <SiteLayout>
+      <NewsTicker />
       <PageHero
         eyebrow="Welcome back"
         title={displayName ? `Hello, ${displayName.split(" ")[0]}` : "Hello again"}
@@ -79,16 +81,16 @@ function Welcome() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {media.map((m, i) => (
               <Reveal key={m.id} delay={i * 70}>
-                <div className="overflow-hidden rounded-2xl border border-border bg-card">
+                <div className="card-lift sheen group overflow-hidden rounded-2xl border border-border bg-card">
                   <div className="aspect-video bg-secondary">
                     {m.media_type === "video" ? (
-                      <video src={m.url} controls className="h-full w-full object-cover" />
+                      <video src={m.url} controls className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     ) : (
                       <img
                         src={m.url}
                         alt={m.title}
                         loading="lazy"
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
                   </div>
@@ -115,7 +117,7 @@ function Welcome() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {drops.map((m, i) => (
               <Reveal key={m.id} delay={i * 70}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-6">
+                <div className="card-lift sheen flex h-full flex-col rounded-2xl border border-border bg-card p-6">
                   <h3 className="font-display text-lg font-bold uppercase tracking-tight">
                     {m.name}
                   </h3>
@@ -145,7 +147,7 @@ function Welcome() {
           <div className="grid gap-5 md:grid-cols-2">
             {work.map((p, i) => (
               <Reveal key={p.id} delay={i * 70}>
-                <div className="h-full rounded-2xl border border-border bg-card p-7">
+                <div className="card-lift sheen h-full rounded-2xl border border-border bg-card p-7">
                   <h3 className="font-display text-lg font-bold uppercase tracking-tight">
                     {p.title}
                   </h3>
