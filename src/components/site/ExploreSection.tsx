@@ -22,7 +22,8 @@ export function ExploreSection() {
   const shots = (media.data ?? []).filter((m) => m.media_type === "image").slice(0, 4);
 
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20">
+    <section className="relative mx-auto max-w-7xl px-5 py-20">
+      <div className="aurora-blob pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full opacity-25" />
       <Reveal>
         <p className="font-display text-xs uppercase tracking-[0.3em] text-primary-glow">
           Explore Synalyx
@@ -38,14 +39,14 @@ export function ExploreSection() {
 
       <div className="mt-10 grid gap-5 lg:grid-cols-3">
         <Reveal>
-          <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-primary/50">
+          <article className="card-lift sheen group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
             <div className="aspect-video overflow-hidden bg-secondary">
               {latestPost?.cover_image_url ? (
                 <img
                   src={latestPost.cover_image_url}
                   alt={latestPost.title}
                   loading="lazy"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/25 to-transparent">
@@ -75,7 +76,7 @@ export function ExploreSection() {
         </Reveal>
 
         <Reveal delay={80}>
-          <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-6">
+          <article className="card-lift sheen group flex h-full flex-col rounded-3xl border border-border bg-card p-6">
             <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-primary-glow" /> Student projects
             </p>
@@ -120,14 +121,14 @@ export function ExploreSection() {
         </Reveal>
 
         <Reveal delay={160}>
-          <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
+          <article className="card-lift sheen group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card">
             <div className="aspect-video overflow-hidden bg-secondary">
               {latestMerch?.image_url ? (
                 <img
                   src={latestMerch.image_url}
                   alt={latestMerch.name}
                   loading="lazy"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/20 to-transparent">
@@ -156,6 +157,36 @@ export function ExploreSection() {
           </article>
         </Reveal>
       </div>
+
+      <Reveal delay={220}>
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {(
+            [
+              { to: "/blog", label: "Blog", icon: BookOpen, note: "Tutorials & teardowns" },
+              { to: "/projects", label: "Projects", icon: Sparkles, note: "Cohort portfolios" },
+              { to: "/gallery", label: "Gallery", icon: Images, note: "Events in photos & video" },
+              { to: "/merch", label: "Merch", icon: ShoppingBag, note: "Pre-order the drop" },
+            ] as const
+          ).map((q) => (
+            <Link
+              key={q.to}
+              to={q.to}
+              className="card-lift sheen group flex items-center gap-4 rounded-2xl border border-border bg-card/70 px-5 py-4"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary-glow transition-transform duration-300 group-hover:scale-110">
+                <q.icon className="h-4.5 w-4.5" />
+              </span>
+              <span>
+                <span className="block font-display text-sm font-bold uppercase tracking-tight">
+                  {q.label}
+                </span>
+                <span className="block text-xs text-muted-foreground">{q.note}</span>
+              </span>
+              <ArrowRight className="ml-auto h-4 w-4 text-primary-glow transition-transform group-hover:translate-x-1" />
+            </Link>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }
