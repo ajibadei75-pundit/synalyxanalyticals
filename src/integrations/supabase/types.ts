@@ -842,6 +842,27 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings_public: {
+        Row: {
+          accent: string | null
+          brand_name: string | null
+          logo_url: string | null
+          tagline: string | null
+        }
+        Insert: {
+          accent?: string | null
+          brand_name?: string | null
+          logo_url?: string | null
+          tagline?: string | null
+        }
+        Update: {
+          accent?: string | null
+          brand_name?: string | null
+          logo_url?: string | null
+          tagline?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
