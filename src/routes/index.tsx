@@ -65,11 +65,13 @@ function Home() {
 
   return (
     <SiteLayout>
+      <NewsTicker />
       <section className="relative overflow-hidden">
         <div className="grid-noise pointer-events-none absolute inset-0 opacity-70" />
+        <div className="aurora-blob pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full" />
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--gradient-primary)" }}
+          className="aurora-blob pointer-events-none absolute -left-52 top-72 h-[28rem] w-[28rem] rounded-full"
+          style={{ animationDelay: "-6s" }}
         />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:py-32">
           <div className="rise-in">
