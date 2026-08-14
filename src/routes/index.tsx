@@ -145,7 +145,7 @@ function Home() {
             <Reveal key={course.id} delay={i * 70}>
               <Link
                 to="/courses"
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/60"
+                className="card-lift sheen group flex h-full flex-col rounded-2xl border border-border bg-card p-7"
               >
                 <div className="flex items-center justify-between">
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
@@ -262,7 +262,6 @@ function Home() {
           </Reveal>
         </div>
       </section>
-      <ExploreSection />
     </SiteLayout>
   );
 }
