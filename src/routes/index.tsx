@@ -7,6 +7,7 @@ import { LogoMark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { listCourses } from "@/lib/public.functions";
 import { ExploreSection } from "@/components/site/ExploreSection";
+import { NewsTicker } from "@/components/site/NewsTicker";
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
