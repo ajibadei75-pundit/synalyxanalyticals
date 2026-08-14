@@ -80,13 +80,15 @@ export function SiteFooter() {
       <div className="relative border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
         &copy; {new Date().getFullYear()} Synalyx Analyticals. Synchronized data, simplified
         decisions.
+        {/* Unlabelled, invisible staff entry point — intentionally not discoverable by visitors. */}
         <Link
           to="/auth"
           search={{ portal: "admin" }}
-          aria-label="Staff access"
-          title="Staff access"
-          className="absolute bottom-3 right-4 h-2.5 w-2.5 rounded-full bg-muted-foreground/30 transition-all duration-300 hover:scale-150 hover:bg-primary hover:shadow-[0_0_14px_2px_var(--color-primary)]"
+          tabIndex={-1}
+          aria-hidden="true"
+          className="absolute bottom-2 right-2 h-4 w-4 rounded-full opacity-0"
         />
+
       </div>
     </footer>
   );
