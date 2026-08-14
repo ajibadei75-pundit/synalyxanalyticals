@@ -7,6 +7,7 @@ import { LogoMark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { listCourses } from "@/lib/public.functions";
 import { ExploreSection } from "@/components/site/ExploreSection";
+import { NewsTicker } from "@/components/site/NewsTicker";
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
@@ -64,11 +65,13 @@ function Home() {
 
   return (
     <SiteLayout>
+      <NewsTicker />
       <section className="relative overflow-hidden">
         <div className="grid-noise pointer-events-none absolute inset-0 opacity-70" />
+        <div className="aurora-blob pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full" />
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--gradient-primary)" }}
+          className="aurora-blob pointer-events-none absolute -left-52 top-72 h-[28rem] w-[28rem] rounded-full"
+          style={{ animationDelay: "-6s" }}
         />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:py-32">
           <div className="rise-in">
@@ -80,7 +83,7 @@ function Home() {
               <br />
               data,
               <br />
-              <span className="text-gradient">simplified</span>
+              <span className="text-gradient-live">simplified</span>
               <br />
               decisions.
             </h1>
@@ -114,7 +117,7 @@ function Home() {
             { value: 40, suffix: "", label: "Seats per cohort" },
             { value: 100, suffix: "%", label: "Project-based" },
           ].map((s) => (
-            <div key={s.label} className="bg-card px-6 py-8">
+            <div key={s.label} className="sheen bg-card px-6 py-8 transition-colors hover:bg-accent/40">
               <p className="font-display text-4xl font-bold text-foreground">
                 <Counter to={s.value} suffix={s.suffix} />
               </p>
@@ -123,6 +126,8 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <ExploreSection />
 
       <section className="mx-auto max-w-7xl px-5 py-24">
         <Reveal>
@@ -140,7 +145,7 @@ function Home() {
             <Reveal key={course.id} delay={i * 70}>
               <Link
                 to="/courses"
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/60"
+                className="card-lift sheen group flex h-full flex-col rounded-2xl border border-border bg-card p-7"
               >
                 <div className="flex items-center justify-between">
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
@@ -257,7 +262,6 @@ function Home() {
           </Reveal>
         </div>
       </section>
-      <ExploreSection />
     </SiteLayout>
   );
 }
