@@ -83,7 +83,7 @@ function Home() {
               <br />
               data,
               <br />
-              <span className="text-gradient">simplified</span>
+              <span className="text-gradient-live">simplified</span>
               <br />
               decisions.
             </h1>
@@ -117,7 +117,7 @@ function Home() {
             { value: 40, suffix: "", label: "Seats per cohort" },
             { value: 100, suffix: "%", label: "Project-based" },
           ].map((s) => (
-            <div key={s.label} className="bg-card px-6 py-8">
+            <div key={s.label} className="sheen bg-card px-6 py-8 transition-colors hover:bg-accent/40">
               <p className="font-display text-4xl font-bold text-foreground">
                 <Counter to={s.value} suffix={s.suffix} />
               </p>
@@ -126,6 +126,8 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <ExploreSection />
 
       <section className="mx-auto max-w-7xl px-5 py-24">
         <Reveal>
