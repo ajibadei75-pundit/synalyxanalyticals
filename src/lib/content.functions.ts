@@ -221,7 +221,8 @@ export const getBlogPost = createServerFn({ method: "GET" })
       .maybeSingle();
     if (error) throw new Error(error.message);
     if (!post) return null;
-    await supabase.rpc("increment_blog_view", { _slug: data.slug });
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    await supabaseAdmin.rpc("increment_blog_view", { _slug: data.slug });
     return post;
   });
 
