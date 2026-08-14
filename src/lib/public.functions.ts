@@ -68,7 +68,10 @@ export type ApplicationInput = z.infer<typeof applicationSchema>;
 export const submitApplication = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => applicationSchema.parse(data))
   .handler(async ({ data }) => {
-    const supabase = serverPublicClient();
+    // Applications hold personal data, so anonymous clients can no longer insert
+    // directly; the row is written server-side after schema validation.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabase = supabaseAdmin;
     const row = {
       ...data,
       date_of_birth: data.date_of_birth || null,
