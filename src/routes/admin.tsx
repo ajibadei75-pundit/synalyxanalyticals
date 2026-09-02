@@ -1050,7 +1050,20 @@ function BrandingForm({
   const [form, setForm] = useState(initial);
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => setForm(initial), [initial]);
+  useEffect(
+    () => setForm(initial),
+    [
+      initial.brand_name,
+      initial.tagline,
+      initial.logo_url,
+      initial.instagram_url,
+      initial.facebook_url,
+      initial.linkedin_url,
+      initial.youtube_url,
+      initial.x_url,
+      initial.whatsapp_url,
+    ],
+  );
 
   const onFile = (file: File | null) => {
     if (!file) return;
