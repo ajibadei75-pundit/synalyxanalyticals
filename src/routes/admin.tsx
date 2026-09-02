@@ -473,6 +473,12 @@ function Admin() {
                 brand_name: settings?.brand_name ?? "SYNALYX",
                 tagline: settings?.tagline ?? "",
                 logo_url: settings?.logo_url ?? null,
+                instagram_url: settings?.instagram_url ?? null,
+                facebook_url: settings?.facebook_url ?? null,
+                linkedin_url: settings?.linkedin_url ?? null,
+                youtube_url: settings?.youtube_url ?? null,
+                x_url: settings?.x_url ?? null,
+                whatsapp_url: settings?.whatsapp_url ?? null,
               }}
               disabled={!isAdmin}
               onSave={async (payload) => {
@@ -1017,14 +1023,47 @@ function BrandingForm({
   disabled,
   onSave,
 }: {
-  initial: { brand_name: string; tagline: string; logo_url: string | null };
+  initial: {
+    brand_name: string;
+    tagline: string;
+    logo_url: string | null;
+    instagram_url: string | null;
+    facebook_url: string | null;
+    linkedin_url: string | null;
+    youtube_url: string | null;
+    x_url: string | null;
+    whatsapp_url: string | null;
+  };
   disabled: boolean;
-  onSave: (p: { brand_name: string; tagline: string; logo_url: string | null }) => Promise<void>;
+  onSave: (p: {
+    brand_name: string;
+    tagline: string;
+    logo_url: string | null;
+    instagram_url: string | null;
+    facebook_url: string | null;
+    linkedin_url: string | null;
+    youtube_url: string | null;
+    x_url: string | null;
+    whatsapp_url: string | null;
+  }) => Promise<void>;
 }) {
   const [form, setForm] = useState(initial);
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => setForm(initial), [initial.brand_name, initial.tagline, initial.logo_url]);
+  useEffect(
+    () => setForm(initial),
+    [
+      initial.brand_name,
+      initial.tagline,
+      initial.logo_url,
+      initial.instagram_url,
+      initial.facebook_url,
+      initial.linkedin_url,
+      initial.youtube_url,
+      initial.x_url,
+      initial.whatsapp_url,
+    ],
+  );
 
   const onFile = (file: File | null) => {
     if (!file) return;
@@ -1083,6 +1122,34 @@ function BrandingForm({
         onChange={(e) => setForm({ ...form, tagline: e.target.value })}
         placeholder="Tagline"
       />
+      <div className="border-t border-border/70 pt-5">
+        <p className="font-display text-sm uppercase tracking-widest">Social handles</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Add full https links. Empty fields stay hidden from visitors.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {([
+            ["instagram_url", "Instagram", "https://instagram.com/your-handle"],
+            ["facebook_url", "Facebook", "https://facebook.com/your-page"],
+            ["linkedin_url", "LinkedIn", "https://linkedin.com/company/your-page"],
+            ["youtube_url", "YouTube", "https://youtube.com/@your-channel"],
+            ["x_url", "X", "https://x.com/your-handle"],
+            ["whatsapp_url", "WhatsApp", "https://wa.me/2349153462245"],
+          ] as const).map(([key, label, placeholder]) => (
+            <div key={key}>
+              <Label htmlFor={key} className="mb-1.5 block text-xs">{label}</Label>
+              <Input
+                id={key}
+                type="url"
+                value={form[key] ?? ""}
+                disabled={disabled}
+                placeholder={placeholder}
+                onChange={(e) => setForm({ ...form, [key]: e.target.value || null })}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="flex gap-2">
         <Button type="submit" className="flex-1" disabled={busy || disabled}>
           {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Save branding
