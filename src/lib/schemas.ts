@@ -4,6 +4,12 @@ export const brandingSchema = z.object({
   brand_name: z.string().trim().min(1).max(60),
   tagline: z.string().trim().max(160),
   logo_url: z.string().trim().max(400_000).nullable(),
+  instagram_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
+  facebook_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
+  linkedin_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
+  youtube_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
+  x_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
+  whatsapp_url: z.string().trim().max(500).refine((value) => !value || /^https:\/\//i.test(value), "Use an https URL").nullable(),
 });
 
 export const reviewSchema = z.object({

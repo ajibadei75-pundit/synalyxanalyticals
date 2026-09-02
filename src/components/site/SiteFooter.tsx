@@ -1,7 +1,21 @@
 import { Link } from "@tanstack/react-router";
+import { Facebook, Instagram, Linkedin, MessageCircle, Twitter, Youtube } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
+const socialLinks = [
+  { key: "instagram_url", label: "Instagram", Icon: Instagram },
+  { key: "facebook_url", label: "Facebook", Icon: Facebook },
+  { key: "linkedin_url", label: "LinkedIn", Icon: Linkedin },
+  { key: "youtube_url", label: "YouTube", Icon: Youtube },
+  { key: "x_url", label: "X", Icon: Twitter },
+  { key: "whatsapp_url", label: "WhatsApp", Icon: MessageCircle },
+] as const;
 
 export function SiteFooter() {
+  const { data: settings } = useSiteSettings();
+  const activeSocialLinks = socialLinks.filter((social) => settings?.[social.key]);
+
   return (
     <footer className="border-t border-border/60 bg-card/40">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-4">
@@ -59,6 +73,31 @@ export function SiteFooter() {
               </Link>
             </li>
           </ul>
+          {activeSocialLinks.length > 0 && (
+            <div className="mt-7">
+              <h3 className="font-display text-sm uppercase tracking-widest text-muted-foreground">
+                Follow the signal
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {activeSocialLinks.map(({ key, label, Icon }) => {
+                  const href = settings?.[key];
+                  if (!href) return null;
+                  return (
+                    <a
+                      key={key}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Synalyx Analyticals on ${label}`}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         <div>

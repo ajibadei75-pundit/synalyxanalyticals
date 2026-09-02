@@ -229,7 +229,17 @@ export const updateBranding = createServerFn({ method: "POST" })
     }
     const { error } = await supabase
       .from("site_settings")
-      .update({ brand_name: data.brand_name, tagline: data.tagline, logo_url: data.logo_url })
+      .update({
+        brand_name: data.brand_name,
+        tagline: data.tagline,
+        logo_url: data.logo_url,
+        instagram_url: data.instagram_url || null,
+        facebook_url: data.facebook_url || null,
+        linkedin_url: data.linkedin_url || null,
+        youtube_url: data.youtube_url || null,
+        x_url: data.x_url || null,
+        whatsapp_url: data.whatsapp_url || null,
+      })
       .eq("singleton", true);
     if (error) throw new Error(error.message);
     return { ok: true as const };
