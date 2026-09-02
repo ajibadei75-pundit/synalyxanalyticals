@@ -711,31 +711,49 @@ export type Database = {
           accent: string
           brand_name: string
           created_at: string
+          facebook_url: string | null
           id: string
+          instagram_url: string | null
+          linkedin_url: string | null
           logo_url: string | null
           singleton: boolean
           tagline: string
           updated_at: string
+          whatsapp_url: string | null
+          x_url: string | null
+          youtube_url: string | null
         }
         Insert: {
           accent?: string
           brand_name?: string
           created_at?: string
+          facebook_url?: string | null
           id?: string
+          instagram_url?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           singleton?: boolean
           tagline?: string
           updated_at?: string
+          whatsapp_url?: string | null
+          x_url?: string | null
+          youtube_url?: string | null
         }
         Update: {
           accent?: string
           brand_name?: string
           created_at?: string
+          facebook_url?: string | null
           id?: string
+          instagram_url?: string | null
+          linkedin_url?: string | null
           logo_url?: string | null
           singleton?: boolean
           tagline?: string
           updated_at?: string
+          whatsapp_url?: string | null
+          x_url?: string | null
+          youtube_url?: string | null
         }
         Relationships: []
       }
@@ -839,6 +857,45 @@ export type Database = {
           target_id?: string | null
           target_type?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      site_settings_public: {
+        Row: {
+          accent: string | null
+          brand_name: string | null
+          facebook_url: string | null
+          instagram_url: string | null
+          linkedin_url: string | null
+          logo_url: string | null
+          tagline: string | null
+          whatsapp_url: string | null
+          x_url: string | null
+          youtube_url: string | null
+        }
+        Insert: {
+          accent?: string | null
+          brand_name?: string | null
+          facebook_url?: string | null
+          instagram_url?: string | null
+          linkedin_url?: string | null
+          logo_url?: string | null
+          tagline?: string | null
+          whatsapp_url?: string | null
+          x_url?: string | null
+          youtube_url?: string | null
+        }
+        Update: {
+          accent?: string | null
+          brand_name?: string | null
+          facebook_url?: string | null
+          instagram_url?: string | null
+          linkedin_url?: string | null
+          logo_url?: string | null
+          tagline?: string | null
+          whatsapp_url?: string | null
+          x_url?: string | null
+          youtube_url?: string | null
         }
         Relationships: []
       }
