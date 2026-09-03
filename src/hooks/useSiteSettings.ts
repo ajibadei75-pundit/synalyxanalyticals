@@ -23,19 +23,17 @@ export function useSiteSettings() {
         .select("brand_name, tagline, logo_url, instagram_url, facebook_url, linkedin_url, youtube_url, x_url, whatsapp_url")
         .limit(1)
         .maybeSingle();
-      return (
-        data ?? {
-          brand_name: "SYNALYX",
-          tagline: "Synchronized data, Simplified decisions",
-          logo_url: null,
-          instagram_url: null,
-          facebook_url: null,
-          linkedin_url: null,
-          youtube_url: null,
-          x_url: null,
-          whatsapp_url: null,
-        }
-      );
+      return {
+        brand_name: data?.brand_name ?? "SYNALYX",
+        tagline: data?.tagline ?? "Synchronized data, Simplified decisions",
+        logo_url: data?.logo_url ?? null,
+        instagram_url: data?.instagram_url ?? null,
+        facebook_url: data?.facebook_url ?? null,
+        linkedin_url: data?.linkedin_url ?? null,
+        youtube_url: data?.youtube_url ?? null,
+        x_url: data?.x_url ?? null,
+        whatsapp_url: data?.whatsapp_url ?? null,
+      };
     },
   });
 }
