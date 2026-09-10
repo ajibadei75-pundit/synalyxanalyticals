@@ -4,12 +4,16 @@ import {
   Activity,
   ArrowRight,
   BarChart3,
+  Binary,
   CalendarCheck,
   ClipboardList,
   Database,
+  Gauge,
   LineChart,
   PieChart,
+  ScatterChart,
   Sparkles,
+  Table2,
   TrendingUp,
   Users,
 } from "lucide-react";
@@ -23,7 +27,14 @@ import { NewsTicker } from "@/components/site/NewsTicker";
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
-  queryFn: () => listCourses(),
+  queryFn: async () => {
+    try {
+      return await listCourses();
+    } catch (error) {
+      console.error("Unable to load public courses", error);
+      return [];
+    }
+  },
 });
 
 export const Route = createFileRoute("/")({
@@ -80,11 +91,6 @@ function Home() {
       <NewsTicker />
       <section className="relative overflow-hidden">
         <div className="grid-noise pointer-events-none absolute inset-0 opacity-70" />
-        <div className="aurora-blob pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full" />
-        <div
-          className="aurora-blob pointer-events-none absolute -left-52 top-72 h-[28rem] w-[28rem] rounded-full"
-          style={{ animationDelay: "-6s" }}
-        />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:py-32">
           <div className="rise-in">
             <p className="font-display text-xs uppercase tracking-[0.4em] text-primary-glow">
@@ -117,22 +123,46 @@ function Home() {
 
           <div className="relative flex min-h-[22rem] items-center justify-center sm:min-h-[27rem]">
             <div className="analytics-orbit pointer-events-none absolute inset-0" aria-hidden="true">
-              <div className="analytics-orbit__ring analytics-orbit__ring--outer" />
-              <div className="analytics-orbit__ring analytics-orbit__ring--middle" />
-              <div className="analytics-orbit__ring analytics-orbit__ring--inner" />
+              <div className="analytics-orbit__grid" />
+              <div className="analytics-orbit__ring analytics-orbit__ring--outer">
+                <span className="analytics-orbit__node analytics-orbit__node--outer-one">
+                  <TrendingUp />
+                  <span>Growth</span>
+                </span>
+                <span className="analytics-orbit__node analytics-orbit__node--outer-two">
+                  <Database />
+                  <span>Data</span>
+                </span>
+                <span className="analytics-orbit__node analytics-orbit__node--outer-three">
+                  <ScatterChart />
+                  <span>Model</span>
+                </span>
+              </div>
+              <div className="analytics-orbit__ring analytics-orbit__ring--middle">
+                <span className="analytics-orbit__node analytics-orbit__node--middle-one">
+                  <PieChart />
+                  <span>Share</span>
+                </span>
+                <span className="analytics-orbit__node analytics-orbit__node--middle-two">
+                  <Table2 />
+                  <span>Query</span>
+                </span>
+                <span className="analytics-orbit__node analytics-orbit__node--middle-three">
+                  <Gauge />
+                  <span>KPI</span>
+                </span>
+              </div>
+              <div className="analytics-orbit__ring analytics-orbit__ring--inner">
+                <span className="analytics-orbit__node analytics-orbit__node--inner-one">
+                  <Activity />
+                  <span>Live</span>
+                </span>
+                <span className="analytics-orbit__node analytics-orbit__node--inner-two">
+                  <Binary />
+                  <span>Code</span>
+                </span>
+              </div>
               <div className="analytics-orbit__sweep" />
-              <div className="analytics-orbit__node analytics-orbit__node--one">
-                <TrendingUp />
-              </div>
-              <div className="analytics-orbit__node analytics-orbit__node--two">
-                <Database />
-              </div>
-              <div className="analytics-orbit__node analytics-orbit__node--three">
-                <PieChart />
-              </div>
-              <div className="analytics-orbit__node analytics-orbit__node--four">
-                <Activity />
-              </div>
             </div>
             <div className="analytics-console relative z-10 flex h-44 w-44 flex-col items-center justify-center rounded-full border border-primary/40 bg-card/90 shadow-[var(--shadow-elevated)] sm:h-52 sm:w-52">
               <LogoMark className="h-20 w-20 object-contain sm:h-24 sm:w-24" />

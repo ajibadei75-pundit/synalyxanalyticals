@@ -26,7 +26,14 @@ import {
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
-  queryFn: () => listCourses(),
+  queryFn: async () => {
+    try {
+      return await listCourses();
+    } catch (error) {
+      console.error("Unable to load enrolment courses", error);
+      return [];
+    }
+  },
 });
 
 export const Route = createFileRoute("/enrol")({
