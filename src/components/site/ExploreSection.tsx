@@ -23,7 +23,6 @@ export function ExploreSection() {
 
   return (
     <section className="relative mx-auto max-w-7xl px-5 py-20">
-      <div className="aurora-blob pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full opacity-25" />
       <Reveal>
         <p className="font-display text-xs uppercase tracking-[0.3em] text-primary-glow">
           Explore Synalyx

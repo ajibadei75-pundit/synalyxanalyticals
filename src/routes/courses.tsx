@@ -8,11 +8,25 @@ import { listCourses, listOpenCohorts } from "@/lib/public.functions";
 
 const coursesQuery = queryOptions({
   queryKey: ["public", "courses"],
-  queryFn: () => listCourses(),
+  queryFn: async () => {
+    try {
+      return await listCourses();
+    } catch (error) {
+      console.error("Unable to load public courses", error);
+      return [];
+    }
+  },
 });
 const cohortsQuery = queryOptions({
   queryKey: ["public", "cohorts"],
-  queryFn: () => listOpenCohorts(),
+  queryFn: async () => {
+    try {
+      return await listOpenCohorts();
+    } catch (error) {
+      console.error("Unable to load open cohorts", error);
+      return [];
+    }
+  },
 });
 
 export const Route = createFileRoute("/courses")({
@@ -61,6 +75,14 @@ function Courses() {
       />
 
       <section className="mx-auto max-w-7xl space-y-6 px-5 py-20">
+        {courses.length === 0 && (
+          <div className="border-y border-border py-14 text-center">
+            <h2 className="font-display text-2xl font-bold uppercase">Course list unavailable</h2>
+            <p className="mt-3 text-muted-foreground">
+              The page is still available. Please refresh shortly or contact us for the current tracks.
+            </p>
+          </div>
+        )}
         {courses.map((course, i) => {
           const open = cohorts.filter((c) => c.course_id === course.id);
           const outline = Array.isArray(course.outline) ? (course.outline as string[]) : [];
