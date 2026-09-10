@@ -258,6 +258,223 @@
 
 /* ---------- Motion system: energetic, accessible ---------- */
 
+@keyframes synalyx-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes synalyx-orbit-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes synalyx-scan {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: rotate(0deg) scale(0.85);
+  }
+  50% {
+    opacity: 0.75;
+    transform: rotate(180deg) scale(1.05);
+  }
+}
+
+@keyframes synalyx-node-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary-glow) 0%, transparent);
+    transform: scale(0.92);
+  }
+  50% {
+    box-shadow: 0 0 0 9px color-mix(in oklab, var(--primary-glow) 18%, transparent);
+    transform: scale(1);
+  }
+}
+
+@keyframes synalyx-bars {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.analytics-orbit {
+  max-width: 32rem;
+  width: 100%;
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+.analytics-orbit__ring,
+.analytics-orbit__sweep {
+  position: absolute;
+  inset: 7%;
+  border: 1px solid color-mix(in oklab, var(--primary) 28%, transparent);
+  border-radius: 999px;
+}
+
+.analytics-orbit__ring::before,
+.analytics-orbit__ring::after {
+  content: "";
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--primary-glow);
+  box-shadow: 0 0 1rem color-mix(in oklab, var(--primary-glow) 70%, transparent);
+}
+
+.analytics-orbit__ring::before {
+  left: 12%;
+  top: -0.25rem;
+}
+
+.analytics-orbit__ring::after {
+  bottom: 12%;
+  right: -0.25rem;
+}
+
+.analytics-orbit__ring--outer {
+  animation: synalyx-orbit 20s linear infinite;
+}
+
+.analytics-orbit__ring--middle {
+  inset: 18%;
+  border-color: color-mix(in oklab, var(--chart-2) 32%, transparent);
+  animation: synalyx-orbit-reverse 14s linear infinite;
+}
+
+.analytics-orbit__ring--inner {
+  inset: 29%;
+  border-style: dashed;
+  border-color: color-mix(in oklab, var(--primary-glow) 45%, transparent);
+  animation: synalyx-orbit 9s linear infinite;
+}
+
+.analytics-orbit__sweep {
+  inset: 11%;
+  border: 0;
+  background: conic-gradient(from 0deg, transparent 0deg, color-mix(in oklab, var(--primary-glow) 20%, transparent) 35deg, transparent 80deg);
+  -webkit-mask: radial-gradient(circle, transparent 48%, var(--foreground) 49%, var(--foreground) 50%, transparent 51%);
+  mask: radial-gradient(circle, transparent 48%, var(--foreground) 49%, var(--foreground) 50%, transparent 51%);
+  animation: synalyx-scan 8s ease-in-out infinite;
+}
+
+.analytics-orbit__node {
+  position: absolute;
+  display: flex;
+  width: 2.6rem;
+  height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--primary-glow) 45%, transparent);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--primary-glow);
+  animation: synalyx-node-pulse 2.8s ease-in-out infinite;
+}
+
+.analytics-orbit__node svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.analytics-orbit__node--one {
+  top: 4%;
+  right: 20%;
+}
+
+.analytics-orbit__node--two {
+  top: 42%;
+  right: 1%;
+  animation-delay: -0.7s;
+}
+
+.analytics-orbit__node--three {
+  bottom: 8%;
+  left: 16%;
+  animation-delay: -1.4s;
+}
+
+.analytics-orbit__node--four {
+  top: 36%;
+  left: 2%;
+  animation-delay: -2.1s;
+}
+
+.analytics-readout {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--muted-foreground);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(10px);
+}
+
+.analytics-readout strong {
+  color: var(--success);
+}
+
+.analytics-readout--top {
+  top: 5%;
+  left: 2%;
+}
+
+.analytics-readout--bottom {
+  right: 3%;
+  bottom: 5%;
+}
+
+.analytics-readout__pulse {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--success);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--success) 18%, transparent);
+}
+
+.analytics-bars {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  height: 0.9rem;
+}
+
+.analytics-bars i {
+  display: block;
+  width: 0.18rem;
+  height: 100%;
+  transform-origin: bottom;
+  background: var(--primary-glow);
+  animation: synalyx-bars 1.2s ease-in-out infinite;
+}
+
+.analytics-bars i:nth-child(2) { animation-delay: -0.2s; }
+.analytics-bars i:nth-child(3) { animation-delay: -0.4s; }
+.analytics-bars i:nth-child(4) { animation-delay: -0.6s; }
+.analytics-bars i:nth-child(5) { animation-delay: -0.8s; }
+
 @keyframes synalyx-marquee {
   from {
     transform: translateX(0);
@@ -382,6 +599,13 @@
   .pulse-ring,
   .float-slow,
   .text-gradient-live {
+    animation: none !important;
+  }
+
+  .analytics-orbit__ring,
+  .analytics-orbit__sweep,
+  .analytics-orbit__node,
+  .analytics-bars i {
     animation: none !important;
   }
 }
