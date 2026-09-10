@@ -1,6 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowRight, BarChart3, CalendarCheck, ClipboardList, Database, LineChart, Users } from "lucide-react";
+import {
+  Activity,
+  ArrowRight,
+  BarChart3,
+  CalendarCheck,
+  ClipboardList,
+  Database,
+  LineChart,
+  PieChart,
+  Sparkles,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Reveal, Counter } from "@/components/site/Reveal";
 import { LogoMark } from "@/components/brand/Logo";
@@ -103,9 +115,40 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative hidden justify-center lg:flex">
-            <div className="float-slow relative flex h-80 w-80 items-center justify-center rounded-4xl border border-border bg-card/60 glow-ring">
-              <LogoMark className="h-44 w-44 text-primary-glow" />
+          <div className="relative flex min-h-[22rem] items-center justify-center sm:min-h-[27rem]">
+            <div className="analytics-orbit pointer-events-none absolute inset-0" aria-hidden="true">
+              <div className="analytics-orbit__ring analytics-orbit__ring--outer" />
+              <div className="analytics-orbit__ring analytics-orbit__ring--middle" />
+              <div className="analytics-orbit__ring analytics-orbit__ring--inner" />
+              <div className="analytics-orbit__sweep" />
+              <div className="analytics-orbit__node analytics-orbit__node--one">
+                <TrendingUp />
+              </div>
+              <div className="analytics-orbit__node analytics-orbit__node--two">
+                <Database />
+              </div>
+              <div className="analytics-orbit__node analytics-orbit__node--three">
+                <PieChart />
+              </div>
+              <div className="analytics-orbit__node analytics-orbit__node--four">
+                <Activity />
+              </div>
+            </div>
+            <div className="analytics-console relative z-10 flex h-44 w-44 flex-col items-center justify-center rounded-full border border-primary/40 bg-card/90 shadow-[var(--shadow-elevated)] sm:h-52 sm:w-52">
+              <LogoMark className="h-20 w-20 object-contain sm:h-24 sm:w-24" />
+              <div className="mt-2 flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.22em] text-primary-glow">
+                <Sparkles className="h-3 w-3" />
+                Live analytics
+              </div>
+            </div>
+            <div className="analytics-readout analytics-readout--top" aria-hidden="true">
+              <span className="analytics-readout__pulse" />
+              <span>DATA FLOW</span>
+              <strong>+24.8%</strong>
+            </div>
+            <div className="analytics-readout analytics-readout--bottom" aria-hidden="true">
+              <span className="analytics-bars"><i /><i /><i /><i /><i /></span>
+              <span>INSIGHT ENGINE</span>
             </div>
           </div>
         </div>
