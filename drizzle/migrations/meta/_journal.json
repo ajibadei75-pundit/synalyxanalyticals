@@ -15,6 +15,13 @@
       "when": 1789075987968,
       "tag": "0001_restore_is_staff_authenticated_execute",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789076006667,
+      "tag": "0002_split_public_content_read_policies",
+      "breakpoints": true
     }
   ]
 }
