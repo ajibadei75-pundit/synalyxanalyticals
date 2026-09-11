@@ -121,7 +121,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative flex min-h-[22rem] items-center justify-center sm:min-h-[27rem]">
+          <div className="relative mx-auto aspect-square w-full max-w-[26rem] sm:max-w-[30rem]">
             <div className="analytics-orbit pointer-events-none absolute inset-0" aria-hidden="true">
               <div className="analytics-orbit__grid" />
               <div className="analytics-orbit__ring analytics-orbit__ring--outer">
