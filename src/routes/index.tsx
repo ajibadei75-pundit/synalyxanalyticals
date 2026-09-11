@@ -163,22 +163,22 @@ function Home() {
                 </span>
               </div>
               <div className="analytics-orbit__sweep" />
+              <div className="analytics-readout analytics-readout--top" aria-hidden="true">
+                <span className="analytics-readout__pulse" />
+                <span>DATA FLOW</span>
+                <strong>+24.8%</strong>
+              </div>
+              <div className="analytics-readout analytics-readout--bottom" aria-hidden="true">
+                <span className="analytics-bars"><i /><i /><i /><i /><i /></span>
+                <span>INSIGHT ENGINE</span>
+              </div>
             </div>
-            <div className="analytics-console relative z-10 flex h-44 w-44 flex-col items-center justify-center rounded-full border border-primary/40 bg-card/90 shadow-[var(--shadow-elevated)] sm:h-52 sm:w-52">
-              <LogoMark className="h-20 w-20 object-contain sm:h-24 sm:w-24" />
+            <div className="analytics-console absolute inset-0 z-10 m-auto flex h-40 w-40 flex-col items-center justify-center rounded-full border border-primary/40 bg-card/90 shadow-[var(--shadow-elevated)] sm:h-48 sm:w-48">
+              <LogoMark className="h-16 w-16 object-contain sm:h-20 sm:w-20" />
               <div className="mt-2 flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.22em] text-primary-glow">
                 <Sparkles className="h-3 w-3" />
                 Live analytics
               </div>
-            </div>
-            <div className="analytics-readout analytics-readout--top" aria-hidden="true">
-              <span className="analytics-readout__pulse" />
-              <span>DATA FLOW</span>
-              <strong>+24.8%</strong>
-            </div>
-            <div className="analytics-readout analytics-readout--bottom" aria-hidden="true">
-              <span className="analytics-bars"><i /><i /><i /><i /><i /></span>
-              <span>INSIGHT ENGINE</span>
             </div>
           </div>
         </div>
